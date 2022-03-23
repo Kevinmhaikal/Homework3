@@ -1,97 +1,41 @@
-h1 {
-  text-align: center;
-}
-.p {
-  margin-left: 5cm;
-}
-b {
-  margin-left: 9.8cm;
-}
-
 body {
-  font-family: "Monserrat";
-  justify-content: center;
-  background-color: aquamarine;
+  background-color: #589b01;
+  font-family: sans-serif;
+  box-sizing: border-box;
 }
 
-/* Ketik code Anda dibawah */
-
-.main {
-  padding: 100px 80px;
-}
-.copy-container h1 {
-  font-size: 140px;
-}
-
-.contents {
-  height: 650px;
-  min-width: fit-content;
-  max-width: fit-content;
-  margin-left: 59ch;
-  margin-top: 150px;
-  border-style: solid;
-  border-width: medium;
-  background-color: greenyellow;
-}
-.section-title {
-  font-size: 28px;
-  padding-bottom: 15px;
-  margin-bottom: 50px;
+h2{
+  margin: 10px 0;
   text-align: center;
 }
-.contents-item {
-  float: left;
-  margin-right: 40px;
-}
-.contents-item p {
-  font-size: 24px;
-  margin-top: 30px;
+
+.playlist {
+  background-color: #b8b8b8;
+  border: 1px solid #000000;
+  width: 300px;
+  overflow: hidden;
+  padding: 25px;
+  border-radius: 10px;
+  margin: 10px auto;
 }
 
-input,
-textarea {
-  width: 400px;
-  margin-top: 10px;
-  margin-bottom: 30px;
-  padding: 20px;
-  font-size: 18px;
-  border: 1px solid #dee7ec;
-}
-.contact-submit {
-  background-color: #dee7ec;
-  color: #889eab;
+.playlist img {
+  width: 200px;
+  margin: 0 50px;
 }
 
-.img_1 {
-  width: 50%;
-  margin-left: 28%;
-}
-.button {
-  margin-top: 1%;
-  margin-left: 46.5%;
-}
-
-.source {
-  margin-top: 5%;
-  margin-left: 33%;
-}
-
-.contact-form {
-  padding-top: 1px;
-  padding-bottom: 80px;
+.playlist p {
+  margin: 10px 0;
   text-align: center;
-  width: 100%;
 }
 
-.message {
-  padding: 15px 40px;
-  background-color: orange;
+a {
+  margin: 0 115px;
+  padding: 8px 10px;
+  background-color: #589b01;
+  color: black;
+  font-weight: bold;
+  border-radius: 5px;
   cursor: pointer;
-  box-shadow: 0 7px orange;
-}
-
-.message:active {
-  position: relative;
-  top: 7px;
-  box-shadow: none;
+  width: 50%;
 }
