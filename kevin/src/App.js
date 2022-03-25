@@ -1,5 +1,8 @@
 
+import logo from './logo.svg';
 import './App.css';
+
+import { Song } from './components/Song';
 
 function App() {
   const data = {
@@ -82,16 +85,9 @@ function App() {
   console.log(data.uri)
 
   return (
-    <div class="header">
-      <h2>Song</h2>
-        <div class="playlist">
-        <img src={data.album.images[0].url} alt="true"/>
-        <p>{data.album.name}</p>
-        <p>{data.artists[0].name}</p>
-
-        <a class="btn" role="button" href={data.uri}>Select</a>
-
-        </div>
+    <div className="App">
+      <Song/>
+        
     </div>
   );
 }

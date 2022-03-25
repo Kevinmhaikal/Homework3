@@ -1,38 +1,97 @@
-.App {
+h1 {
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.p {
+  margin-left: 14.8cm;
+}
+b {
+  margin-left: 15cm;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+body {
+  font-family: "Monserrat";
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background-color: aquamarine;
 }
 
-.App-link {
-  color: #61dafb;
+/* Ketik code Anda dibawah */
+
+.main {
+  padding: 100px 80px;
+}
+.copy-container h1 {
+  font-size: 140px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.contents {
+  height: 650px;
+  min-width: fit-content;
+  max-width: fit-content;
+  margin-left: 290px;
+  margin-top: 150px;
+  border-style: solid;
+  border-width: medium;
+  background-color: greenyellow;
+}
+.section-title {
+  font-size: 28px;
+  padding-bottom: 15px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+.contents-item {
+  float: left;
+  
+}
+.contents-item p {
+  font-size: 24px;
+  margin-top: 30px;
+}
+
+input,
+textarea {
+  width: 400px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  padding: 20px;
+  font-size: 18px;
+  border: 1px solid #dee7ec;
+}
+.contact-submit {
+  background-color: #dee7ec;
+  color: #889eab;
+}
+
+.img_1 {
+  width: 50%;
+  margin-left: 25%;
+}
+.button {
+  margin-top: 1%;
+  margin-left: 14.3cm;
+}
+
+.source {
+  margin-top: 5%;
+  margin-left: 33%;
+}
+
+.contact-form {
+  padding-top: 1px;
+  padding-bottom: 80px;
+  text-align: center;
+  width: 100%;
+}
+
+.message {
+  padding: 15px 40px;
+  background-color: orange;
+  cursor: pointer;
+  box-shadow: 0 7px orange;
+}
+
+.message:active {
+  position: relative;
+  top: 7px;
+  box-shadow: none;
 }
