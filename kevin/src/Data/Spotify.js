@@ -118,7 +118,7 @@ const Data = [
           width: 64
         }
       ],
-      name: "Bohemian Rhapsody (The Original Soundtrack)",
+      name: "Bohemian Rhapsody (The Original Soundtrack)-1",
       release_date: "2018-10-19",
       release_date_precision: "day",
       total_tracks: 22,
@@ -437,7 +437,7 @@ const Data = [
           width: 64
         }
       ],
-      name: "Bohemian Rhapsody (The Original Soundtrack)",
+      name: "Bohemian Rhapsody (The Original Soundtrack)-2",
       release_date: "2018-10-19",
       release_date_precision: "day",
       total_tracks: 22,
@@ -596,7 +596,7 @@ const Data = [
           width: 64
         }
       ],
-      name: "Bohemian Rhapsody (The Original Soundtrack)",
+      name: "Bohemian Rhapsody (The Original Soundtrack)-3",
       release_date: "2018-10-19",
       release_date_precision: "day",
       total_tracks: 22,
@@ -675,7 +675,7 @@ const Data = [
           width: 64
         }
       ],
-      name: "Bohemian Rhapsody (The Original Soundtrack)",
+      name: "Bohemian Rhapsody (The Original Soundtrack)-4",
       release_date: "2018-10-19",
       release_date_precision: "day",
       total_tracks: 22,
@@ -754,7 +754,7 @@ const Data = [
           width: 64
         }
       ],
-      name: "Bohemian Rhapsody (The Original Soundtrack)",
+      name: "Bohemian Rhapsody (The Original Soundtrack)-5",
       release_date: "2018-10-19",
       release_date_precision: "day",
       total_tracks: 22,
