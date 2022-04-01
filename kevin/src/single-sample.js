@@ -1,4 +1,4 @@
-const Data = [
+const data = [
   {
     album: {
       album_type: "album",
@@ -118,7 +118,7 @@ const Data = [
           width: 64
         }
       ],
-      name: "Bohemian Rhapsody (The Original Soundtrack)-1",
+      name: "Bohemian Rhapsody (The Original Soundtrack)",
       release_date: "2018-10-19",
       release_date_precision: "day",
       total_tracks: 22,
@@ -437,7 +437,7 @@ const Data = [
           width: 64
         }
       ],
-      name: "Bohemian Rhapsody (The Original Soundtrack)-2",
+      name: "Bohemian Rhapsody (The Original Soundtrack)",
       release_date: "2018-10-19",
       release_date_precision: "day",
       total_tracks: 22,
@@ -596,7 +596,7 @@ const Data = [
           width: 64
         }
       ],
-      name: "Bohemian Rhapsody (The Original Soundtrack)-3",
+      name: "Bohemian Rhapsody (The Original Soundtrack)",
       release_date: "2018-10-19",
       release_date_precision: "day",
       total_tracks: 22,
@@ -675,7 +675,7 @@ const Data = [
           width: 64
         }
       ],
-      name: "Bohemian Rhapsody (The Original Soundtrack)-4",
+      name: "Bohemian Rhapsody (The Original Soundtrack)",
       release_date: "2018-10-19",
       release_date_precision: "day",
       total_tracks: 22,
@@ -754,7 +754,7 @@ const Data = [
           width: 64
         }
       ],
-      name: "Bohemian Rhapsody (The Original Soundtrack)-5",
+      name: "Bohemian Rhapsody (The Original Soundtrack)",
       release_date: "2018-10-19",
       release_date_precision: "day",
       total_tracks: 22,
@@ -795,4 +795,4 @@ const Data = [
   }
 ];
 
-export default Data;
+export default data;

@@ -1,104 +1,81 @@
-import { Component } from "react";
-import "./style/App.css";
-import Song from "./components/Album/index";
-import Data from "./data/spotify";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Song from "./components/Song/index";
+import url from "./kevv/spotify";
 
-class App extends Component {
-  state = {
-    accessToken: window.location.hash
-      .substring(1, window.location.hash.length - 1)
-      .split("&")[0]
-      .split("=")[1],
-    search: "",
-    track: []
-  };
+function App() {
+  const [token, setToken] = useState("");
+  const [searchSong, setSearchSong] = useState("");
+  const [songData, setSongData] = useState([]);
 
-  forLogin = () => {
-    window.open(
-      `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=token&redirect_uri=http://localhost:3000/`
-    );
-  };
+  useEffect(() => {
+    const queryString = new URL(window.location.href.replace("#", "?"))
+      .searchParams;
+    const accessToken = queryString.get("access_token");
+    setToken(accessToken);
+  }, []);
 
-  forChange = (e) => {
-    this.setState({
-      search: e.target.value
-    });
-  };
-
-  forSearch = () => {
-    fetch(
-      "https://api.spotify.com/v1/search?q=" +
-        this.state.search +
-        "&access_token=" +
-        this.state.accessToken +
-        "&type=track"
-    )
-      .then((track) => track.json())
-      .then((track) => {
-        console.log(track);
-        this.setState({
-          track: track.tracks.items
-        });
+  const getSong = async () => {
+    await axios
+      .get(
+        `https://api.spotify.com/v1/search?q=${searchSong}&type=track&access_token=${token}`
+      )
+      .then((response) => {
+        setSongData(response.data.tracks.items);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 
-  render() {
-    return (
-      <body>
-        <div className="container">
-          {this.state.accessToken ? (
-            <div className="card-one">
-              <h1>SEARCH SONG</h1>
-              <input onChange={this.forChange} />
-              <br></br>
-              <button onClick={this.forSearch}>Cari</button>
-              <div>{this.state.track.map((item) => item.name)}</div>
-            </div>
-          ) : (
-            <div className="card-one">
-              <h2>LOGIN SPOTIFY</h2>
-              <button onClick={this.forLogin}>Login</button>
-            </div>
-          )}
-          <div className="Header">
-            <h1>Song Playlist</h1>
-          </div>
-          <div className="playlist">
-            {Data.map((d) => (
-              <Song
-                image={d.album.images[0].url}
-                album={d.name}
-                artist={d.artists[0]?.name}
-                title={d.album.name}
-                key={d.album.name}
-              />
-            ))}
+  return (
+    <div className="p-5 bg-gray-900 h-screen space-y-5 overflow-auto">
+      <div className="text-center">
+        <h2 className="text-white text-3xl mb-5 font-semibold">
+          Create Playlist
+        </h2>
+        <a
+          href={url}
+          className="py-2 px-4 bg-blue-600 rounded text-white font-medium uppercase hover:bg-blue-700 text-xs leading-tight"
+        >
+          Login
+        </a>
+      </div>
+      <div className="flex justify-center">
+        <div className="mb-3 xl:w-96">
+          <div className="flex w-full mb-4">
+            <input
+              type="search"
+              className="flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal bg-white border border-solid border-gray-300 rounded-l transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              placeholder="Search"
+              aria-label="Search"
+              onChange={(e) => setSearchSong(e.target.value)}
+            />
+            <button
+              className="px-6 py-2 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-r focus:outline-none focus:ring-0 transition duration-150 ease-in-out hover:bg-blue-700"
+              type="button"
+              onClick={getSong}
+            >
+              Search
+            </button>
           </div>
         </div>
-      </body>
-    );
-  }
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {songData.map((song) => {
+          const { id, name, artists, album } = song;
+          return (
+            <Song
+              key={id}
+              image={album.images[0]?.url}
+              title={name}
+              album={artists[0]?.name}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
 }
-// function App() {
-//   return (
-// <div className="container">
-//   <div className="Header">
-//     <h1>Song Playlist</h1>
-//   </div>
-
-// <div className="playlist">
-//   {Data.map((d) => (
-//     <Song
-//       image={d.album.images[0].url}
-//       album={d.name}
-//       artist={d.artists[0]?.name}
-//       title={d.album.name}
-//       key={d.album.name}
-//     />
-//   ))}
-// </div>
-//     </div>
-//   );
-// }
 
 export default App;
