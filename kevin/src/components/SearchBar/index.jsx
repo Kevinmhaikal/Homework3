@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
-import Button from '../Button';
-import './index.css';
-import PropTypes from 'prop-types';
-import Input from '../Input';
-import { searchTrack } from '../../lib/fetchApi.js';
-import { toast } from 'react-toastify';
+import React, { useState } from "react";
+import Button from "../Button";
+import "./index.css";
+import PropTypes from "prop-types";
+import Input from "../Input";
+import { searchTrack } from "../../lib/fetchApi";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
-export default function SearchBar({ accessToken, onSuccess, onClearSearch }) {
-  const [text, setText] = useState('');
+export default function SearchBar({ onSuccess, onClearSearch }) {
+  const accessToken = useSelector((state) => state.auth.accessToken);
+  const [text, setText] = useState("");
   const [isClear, setIsClear] = useState(true);
 
   const handleInput = (e) => {
     setText(e.target.value);
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,13 +28,13 @@ export default function SearchBar({ accessToken, onSuccess, onClearSearch }) {
     } catch (e) {
       toast.error(e);
     }
-  }
+  };
 
   const handleClear = () => {
     onClearSearch();
-    setText('');
+    setText("");
     setIsClear(true);
-  }
+  };
 
   return (
     <div>
@@ -49,14 +51,15 @@ export default function SearchBar({ accessToken, onSuccess, onClearSearch }) {
       </form>
 
       {!isClear && (
-        <Button variant="text" onClick={handleClear} className="mt-1">Clear search</Button>
+        <Button variant="text" onClick={handleClear} className="mt-1">
+          Clear search
+        </Button>
       )}
     </div>
-  )
+  );
 }
 
 SearchBar.propTypes = {
-  accessToken: PropTypes.string.isRequired,
   onSuccess: PropTypes.func.isRequired,
-  onClearSearch: PropTypes.func.isRequired,
-}
+  onClearSearch: PropTypes.func.isRequired
+};

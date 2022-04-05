@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from "react";
-import Tracks from "../components/Tracks";
+import Track from "../components/Track";
 import SearchBar from "../components/SearchBar";
 import config from "../lib/config";
 import Button from "../components/Button";
-import CreatePlaylistSpotify from "../components/CreatePlaylistSpotify";
-import { getUserProfile } from "../lib/fetchApi.js";
+import CreatePlaylistForm from "../components/CreatePlaylistSpotify";
+import { getUserProfile } from "../lib/fetchApi";
 import { toast } from "react-toastify";
+import { useDocumentTitle } from "../lib/customHooks";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../slice/authSlice";
 
 export default function Home() {
-  const [accessToken, setAccessToken] = useState("");
-  const [isAuthorize, setIsAuthorize] = useState(false);
   const [tracks, setTracks] = useState([]);
   const [selectedTracksUri, setSelectedTracksUri] = useState([]);
   const [selectedTracks, setSelectedTracks] = useState([]);
   const [isInSearch, setIsInSearch] = useState(false);
-  const [user, setUser] = useState({});
+  const isAuthorize = useSelector((state) => state.auth.isAuthorize);
+  const dispatch = useDispatch();
+
+  useDocumentTitle("Home - Spotipy");
 
   useEffect(() => {
     const accessTokenParams = new URLSearchParams(window.location.hash).get(
@@ -22,14 +26,16 @@ export default function Home() {
     );
 
     if (accessTokenParams !== null) {
-      setAccessToken(accessTokenParams);
-      setIsAuthorize(accessTokenParams !== null);
-
       const setUserProfile = async () => {
         try {
-          const response = await getUserProfile(accessTokenParams);
+          const responseUser = await getUserProfile(accessTokenParams);
 
-          setUser(response);
+          dispatch(
+            login({
+              accessToken: accessTokenParams,
+              user: responseUser
+            })
+          );
         } catch (e) {
           toast.error(e);
         }
@@ -83,33 +89,25 @@ export default function Home() {
     <>
       {!isAuthorize && (
         <main className="center">
-          <h2>Login</h2>
+          <p>Login</p>
           <Button href={getSpotifyLinkAuthorize()}>Click This Button</Button>
         </main>
       )}
 
       {isAuthorize && (
         <main className="container" id="home">
-          <CreatePlaylistSpotify
-            accessToken={accessToken}
-            userId={user.id}
-            uriTracks={selectedTracksUri}
-          />
+          <CreatePlaylistForm uriTracks={selectedTracksUri} />
 
           <hr />
 
-          <SearchBar
-            accessToken={accessToken}
-            onSuccess={onSuccessSearch}
-            onClearSearch={clearSearch}
-          />
+          <SearchBar onSuccess={onSuccessSearch} onClearSearch={clearSearch} />
 
           <div className="content">
             {tracks.length === 0 && <p>No tracks</p>}
 
             <div className="tracks">
               {tracks.map((track) => (
-                <Tracks
+                <Track
                   key={track.id}
                   imageUrl={track.album.images[0].url}
                   title={track.name}
