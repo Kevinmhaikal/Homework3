@@ -1,33 +1,35 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import { addTracksToPlaylist, createPlaylist } from "../../lib/fetchApi";
-import Button from "../Button";
-import Input from "../Input";
-import InputGroup from "../InputGroup";
-import "./index.css";
-import PropTypes from "prop-types";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { addTracksToPlaylist, createPlaylist } from '../../lib/fetchApi';
+import Button from '../Button';
+import Input from '../Input';
+import InputGroup from '../InputGroup';
+import './index.css';
+import PropTypes from 'prop-types';
+import { logout } from '../../slice/authSlice';
 
 export default function CreatePlaylistForm({ uriTracks }) {
   const accessToken = useSelector((state) => state.auth.accessToken);
   const userId = useSelector((state) => state.auth.user.id);
+  const dispatch = useDispatch();
 
   const [form, setForm] = useState({
-    title: "",
-    description: ""
+    title: '',
+    description: '',
   });
 
   const [errorForm, setErrorForm] = useState({
-    title: "",
-    description: ""
+    title: '',
+    description: '',
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
     setForm({ ...form, [name]: value });
-    setErrorForm({ ...errorForm, [name]: "" });
-  };
+    setErrorForm({ ...errorForm, [name]: '' });
+  }
 
   const validateForm = () => {
     let isValid = true;
@@ -35,7 +37,7 @@ export default function CreatePlaylistForm({ uriTracks }) {
     if (form.title.length < 10) {
       setErrorForm({
         ...errorForm,
-        title: "Title must be at least 10 characters long"
+        title: 'Title must be at least 10 characters long',
       });
       isValid = false;
     }
@@ -43,13 +45,13 @@ export default function CreatePlaylistForm({ uriTracks }) {
     if (form.description.length > 100) {
       setErrorForm({
         ...errorForm,
-        description: "Description must be less than 100 characters long"
+        description: 'Description must be less than 100 characters long',
       });
       isValid = false;
     }
 
     return isValid;
-  };
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,32 +59,28 @@ export default function CreatePlaylistForm({ uriTracks }) {
     if (validateForm()) {
       if (uriTracks.length > 0) {
         try {
-          const responseCreatePlaylist = await createPlaylist(
-            accessToken,
-            userId,
-            {
-              name: form.title,
-              description: form.description
-            }
-          );
+          const responseCreatePlaylist = await createPlaylist(accessToken, userId, {
+            name: form.title,
+            description: form.description,
+          });
 
-          await addTracksToPlaylist(
-            accessToken,
-            responseCreatePlaylist.id,
-            uriTracks
-          );
+          await addTracksToPlaylist(accessToken, responseCreatePlaylist.id, uriTracks);
 
-          toast.success("Playlist created successfully");
+          toast.success('Playlist created successfully');
 
-          setForm({ title: "", description: "" });
+          setForm({ title: '', description: '' });
         } catch (error) {
-          toast.error(error);
+          if (error.response.status === 401) {
+            dispatch(logout());
+          } else {
+            toast.error(error.message);
+          }
         }
       } else {
-        toast.error("Please select at least one track");
+        toast.error('Please select at least one track');
       }
     }
-  };
+  }
 
   return (
     <div className="create-playlist-form">
@@ -104,7 +102,7 @@ export default function CreatePlaylistForm({ uriTracks }) {
           </InputGroup>
           <InputGroup>
             <Input
-              type="textarea"
+              type='textarea'
               label="Description"
               placeholder="Description of playlist"
               value={form.description}
@@ -122,9 +120,9 @@ export default function CreatePlaylistForm({ uriTracks }) {
         </form>
       </div>
     </div>
-  );
+  )
 }
 
 CreatePlaylistForm.propTypes = {
-  uriTracks: PropTypes.array.isRequired
+  uriTracks: PropTypes.array.isRequired,
 };

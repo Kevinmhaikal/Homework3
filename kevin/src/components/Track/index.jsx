@@ -1,21 +1,15 @@
-import React, { useState } from "react";
-import "./index.css";
-import PropTypes from "prop-types";
-import Button from "../Button";
+import React, { useState } from 'react';
+import './index.css';
+import PropTypes from 'prop-types';
+import Button from '../Button';
 
-export default function Track({
-  imageUrl,
-  title,
-  artist,
-  select,
-  toggleSelect
-}) {
+export default function Track({ imageUrl, title, artist, select, toggleSelect }) {
   const [isSelected, setIsSelected] = useState(select);
 
   const handleToggleSelect = () => {
     setIsSelected(!isSelected);
     toggleSelect();
-  };
+  }
 
   return (
     <div className="card">
@@ -28,13 +22,13 @@ export default function Track({
           <h3 className="card__title">{title}</h3>
           <p className="card__artist">{artist}</p>
         </div>
-
+        
         <div className="card__action">
           <Button
-            variant={isSelected ? "primary" : "secondary"}
+            variant={isSelected ? 'primary' : 'secondary'}
             onClick={handleToggleSelect}
           >
-            {isSelected ? "Deselect" : "Select"}
+            {isSelected ? 'Deselect' : 'Select'}
           </Button>
         </div>
       </div>
@@ -47,5 +41,5 @@ Track.propTypes = {
   title: PropTypes.string.isRequired,
   artist: PropTypes.string.isRequired,
   toggleSelect: PropTypes.func.isRequired,
-  select: PropTypes.bool.isRequired
+  select: PropTypes.bool.isRequired,
 };
