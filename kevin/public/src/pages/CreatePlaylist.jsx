@@ -4,7 +4,6 @@ import SearchBar from '../components/SearchBar';
 import CreatePlaylistForm from '../components/CreatePlaylistForm';
 import { useDocumentTitle } from '../lib/customHooks';
 import Layout from '../components/Layout';
-import { Box, Divider, Grid, Text } from '@chakra-ui/react';
 
 export default function Home() {
   const [tracks, setTracks] = useState([]);
@@ -58,38 +57,35 @@ export default function Home() {
 
   return (
     <Layout>
-      <Box as="main" className="container" my={5}>
+      <main className="container" id="home">
         <CreatePlaylistForm uriTracks={selectedTracksUri} />
 
-        <Divider variant="dashed" my={10} />
+        <hr />
 
         <SearchBar
           onSuccess={onSuccessSearch}
           onClearSearch={clearSearch}
         />
 
-        <Box mt={10}>
-          {(tracks.length === 0 ? ( 
-            <Text>{message}</Text>
-          ) : (
-            <Grid
-              templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
-              gap={5}
-            >
-              {tracks.map((track) => (
-                <Track
-                  key={track.id}
-                  imageUrl={track.album.images[0].url}
-                  title={track.name}
-                  artist={track.artists[0].name}
-                  select={selectedTracksUri.includes(track.uri)}
-                  toggleSelect={() => toggleSelect(track)}
-                />
-              ))}
-            </Grid>
-          ))}
-        </Box>
-      </Box>
+        <div className="content">
+          {tracks.length === 0 && (
+            <p>{message}</p>
+          )}
+
+          <div className="tracks">
+            {tracks.map((track) => (
+              <Track
+                key={track.id}
+                imageUrl={track.album.images[0].url}
+                title={track.name}
+                artist={track.artists[0].name}
+                select={selectedTracksUri.includes(track.uri)}
+                toggleSelect={() => toggleSelect(track)}
+              />
+            ))}
+          </div>
+        </div>
+      </main>
     </Layout>
   );
 }

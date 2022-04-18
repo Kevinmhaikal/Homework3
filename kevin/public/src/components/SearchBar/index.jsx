@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import Button from '../Button';
+import './index.scss';
 import PropTypes from 'prop-types';
+import Input from '../Input';
 import { searchTrack } from '../../lib/fetchApi';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../slice/authSlice';
 import { FaSearch } from "react-icons/fa";
-import { Box, Button, Flex, Input } from '@chakra-ui/react';
 
 export default function SearchBar({ onSuccess, onClearSearch }) {
   const accessToken = useSelector((state) => state.auth.accessToken);
@@ -42,21 +44,23 @@ export default function SearchBar({ onSuccess, onClearSearch }) {
   }
 
   return (
-    <Box>
-      <Flex as="form" gap={3} onSubmit={handleSubmit}>
+    <div>
+      <form className="form-search" onSubmit={handleSubmit}>
         <Input
+          type="text"
           placeholder="Search track..."
+          className="form-search__input"
           required
           value={text}
           onChange={handleInput}
         />
         <Button type="submit"><FaSearch /></Button>
-      </Flex>
+      </form>
 
       {!isClear && (
-        <Button variant="link" onClick={handleClear} mt={1}>Clear search</Button>
+        <Button variant="text" onClick={handleClear} className="mt-1">Clear search</Button>
       )}
-    </Box>
+    </div>
   )
 }
 
