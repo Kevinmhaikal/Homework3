@@ -1,5 +1,4 @@
 import React, { ChangeEventHandler, FormEventHandler, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { addTracksToPlaylist, createPlaylist } from '../../lib/fetchApi';
 import { logout } from '../../slice/authSlice';
@@ -15,8 +14,9 @@ import {
   VStack,
   Heading
 } from '@chakra-ui/react';
-import store from '../../store';
+import { useAppDispatch, useAppSelector } from '../../store';
 import axios from 'axios';
+import { Playlist } from '../../types/playlist';
 
 interface IProps {
   uriTracks: string[];
@@ -28,12 +28,11 @@ interface IForm {
 }
 
 type TValidateForm = () => boolean;
-type TRootState = ReturnType<typeof store.getState>;
 
 const CreatePlaylistForm: React.FC<IProps> = ({ uriTracks }) => {
-  const accessToken: string = useSelector((state: TRootState) => state.auth.accessToken);
-  const userId: string = useSelector((state: TRootState) => state.auth.user?.id);
-  const dispatch = useDispatch();
+  const accessToken: string = useAppSelector((state) => state.auth.accessToken);
+  const userId: string | undefined = useAppSelector((state) => state.auth.user?.id);
+  const dispatch = useAppDispatch();
 
   const [form, setForm] = useState<IForm>({
     title: '',
@@ -80,7 +79,7 @@ const CreatePlaylistForm: React.FC<IProps> = ({ uriTracks }) => {
     if (validateForm()) {
       if (uriTracks.length > 0) {
         try {
-          const responseCreatePlaylist = await createPlaylist(accessToken, userId, {
+          const responseCreatePlaylist: Playlist = await createPlaylist(accessToken, userId, {
             name: form.title,
             description: form.description,
           });
@@ -126,6 +125,7 @@ const CreatePlaylistForm: React.FC<IProps> = ({ uriTracks }) => {
             onChange={handleChange}
             value={form.title}
             placeholder="Title of playlist"
+            data-testid="title-playlist"
           />
           {errorForm.title && (
             <FormErrorMessage>{errorForm.title}</FormErrorMessage>
@@ -140,6 +140,7 @@ const CreatePlaylistForm: React.FC<IProps> = ({ uriTracks }) => {
             value={form.description}
             name="description"
             onChange={handleChange}
+            data-testid="description-playlist"
           />
           {errorForm.description && (
             <FormErrorMessage>{errorForm.description}</FormErrorMessage>
@@ -147,7 +148,7 @@ const CreatePlaylistForm: React.FC<IProps> = ({ uriTracks }) => {
         </FormControl>
 
         <HStack justify="flex-end">
-          <Button type="submit">Create</Button>  
+          <Button type="submit" data-testid="btn-create-playlist">Create</Button>  
         </HStack>
       </Box>
     </VStack>

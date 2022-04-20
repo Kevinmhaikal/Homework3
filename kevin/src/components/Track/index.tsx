@@ -39,14 +39,19 @@ const Track: React.FC<IProps> = ({ imageUrl, title, artist, select, toggleSelect
         boxShadow: '0px 7px 15px -7px rgba(0, 0, 0, 0.1)',
       }}
     >
-      <AspectRatio w={{ base: '35%', sm: '100%' }} ratio={1} overflow="hidden">
+      <AspectRatio
+        w={{ base: '35%', sm: '100%' }}
+        ratio={1}
+        overflow="hidden"
+        borderRadius={{ sm: 10 }}
+      >
         <Image
           src={imageUrl}
           alt={title}
-          borderRadius={{ sm: 10 }}
           transform="scale(1.1)"
           _groupHover={{ transform: 'scale(1)' }}
-          transition="transform .3s ease-in-out" />
+          transition="transform .3s ease-in-out"
+          data-testid="track-img" />
       </AspectRatio>
 
       <VStack
@@ -61,14 +66,28 @@ const Track: React.FC<IProps> = ({ imageUrl, title, artist, select, toggleSelect
         }}
       >
         <Box>
-          <Heading as="h3" size="sm" isTruncated>{title}</Heading>
-          <Text fontSize="sm" isTruncated>{artist}</Text>
+          <Heading
+            as="h3"
+            size="sm"
+            isTruncated
+            data-testid="track-title"
+          >
+            {title}
+          </Heading>
+          <Text
+            fontSize="sm"
+            isTruncated
+            data-testid="track-artist"
+          >
+            {artist}
+          </Text>
         </Box>
 
         <HStack justify="flex-end">
           <Button
             variant={isSelected ? 'solid' : 'outline'}
             onClick={handleToggleSelect}
+            data-testid="track-btn-select"
           >
             {isSelected ? 'Deselect' : 'Select'}
           </Button>
