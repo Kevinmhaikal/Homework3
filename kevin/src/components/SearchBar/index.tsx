@@ -14,7 +14,7 @@ interface IProps {
 }
 
 const SearchBar: React.FC<IProps> = ({ onSuccess, onClearSearch }) => {
-  const accessToken: string = useAppSelector((state) => state.auth.accessToken);
+  const accessToken: string = useAppSelector((state: { auth: { accessToken: any; }; }) => state.auth.accessToken);
   const [text, setText] = useState<string>('');
   const [isClear, setIsClear] = useState<boolean>(true);
   const dispatch = useAppDispatch();

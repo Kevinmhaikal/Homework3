@@ -12,7 +12,7 @@ import { useAppDispatch } from '../../store';
 const Auth : React.FC = () => {
   const dispatch = useAppDispatch();
   const history = useHistory();
-  useDocumentTitle('Auth - Spotipy');
+  useDocumentTitle('Spotify');
 
   const setLogin = useCallback(async (accessToken, expiresIn) => {
     try {
@@ -42,29 +42,23 @@ const Auth : React.FC = () => {
   }, [setLogin]);
 
   const buildSpotifyLinkAuthorize: () => string = () => {
-    const state: string = Date.now().toString();
-    const clientId: string | undefined = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
-
-    return 'https://accounts.spotify.com/authorize?' +
-      `client_id=${clientId}` +
-      '&response_type=token' +
-      `&redirect_uri=${config.HOST}` +
-      `&state=${state}` +
-      `&scope=${config.SPOTIFY_SCOPE}`;
+    const clientId = "0344ccf8dc2a4d3586af4e9e70b08df0";
+    return `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=http://localhost:3000/`;
   }
 
   return (
     <main>
       <Box className="center" gap={2}>
-        <Text>Login for next step...</Text>
+        <Text>Spotify</Text>
 
         <Link href={buildSpotifyLinkAuthorize()} _hover={{ textDecoration: 'none' }}>
-          <Button>Authorize</Button>
+          <Button>Login</Button>
         </Link>
       </Box>
       
     </main>
   )
 }
+
 
 export default Auth;

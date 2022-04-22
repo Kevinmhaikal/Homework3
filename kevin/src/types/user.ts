@@ -1,4 +1,4 @@
-import { ExternalUrls } from './exterrnalUrls';
+import { ExternalUrls } from './externalUrls';
 import { Followers } from './followers';
 import { Image } from './image';
 

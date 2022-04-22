@@ -1,4 +1,4 @@
-import { ExternalUrls } from './exterrnalUrls';
+import { ExternalUrls } from './externalUrls';
 import { Image } from './image';
 
 export interface ExternalIDS {

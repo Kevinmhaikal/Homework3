@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useDocumentTitle } from '../../lib/customHooks';
 
 const NotFound: React.FC = () => {
-  useDocumentTitle('Not Found - Spotipy');
+  useDocumentTitle('Not Found - Spotify');
 
   return (
     <Box as="main" className="center" gap={2}>

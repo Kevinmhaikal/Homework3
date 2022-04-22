@@ -3,8 +3,8 @@ import { extendTheme } from '@chakra-ui/react';
 const theme = extendTheme({
   colors: {
     primary: {
-      400: '#24cf88',
-      500: '#12c57a',
+      400: '#ECC94B',
+      500: '#38A169',
     }
   },
   components: {
@@ -16,7 +16,7 @@ const theme = extendTheme({
       variants: {
         solid: {
           bg: 'primary.500',
-          color: 'white',
+          color: 'black',
           _hover: {
             bg: 'primary.400',
           },

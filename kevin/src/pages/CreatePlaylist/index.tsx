@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import Track from '../../components/Track';
 import SearchBar from '../../components/SearchBar';
 import CreatePlaylistForm from '../../components/CreatePlaylistForm';
@@ -15,7 +15,7 @@ const CreatePlaylist: React.FC = () => {
   const [selectedTracks, setSelectedTracks] = useState<ITrack[]>([]);
   const [isInSearch, setIsInSearch] = useState<boolean>(false);
   const [message, setMessage] = useState<string>('No tracks');
-  useDocumentTitle('Create Playlist - Spotipy');
+  useDocumentTitle('Create Playlist - Spotify');
 
   useEffect(() => {
     if (!isInSearch) {

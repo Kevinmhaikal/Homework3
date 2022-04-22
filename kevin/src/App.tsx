@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import CreatePlaylist from './pages/CreatePlaylist';
-import { useLocation, Switch, Route } from 'react-router-dom';
+import { useLocation, Switch ,Route } from 'react-router-dom';
 import Auth from './pages/Auth';
 import GuardRoute from './components/GuardRoute';
 import NotFound from './pages/NotFound';
 import { login, logout } from './slice/authSlice';
 import { useAppDispatch, useAppSelector } from './store';
 import { User } from './types/user';
+
 
 const App: React.FC = () => {
   const { pathname }: { pathname: string } = useLocation();
